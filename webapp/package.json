@@ -9,6 +9,7 @@
 		"clean": "rimraf ./dist"
 	},
 	"dependencies": {
+		"bulma": "^0.9.4",
 		"preact": "10.5.13"
 	},
 	"devDependencies": {
