@@ -1,0 +1,24 @@
+{
+	"name": "vantaafm",
+	"version": "2.0.0",
+	"scripts": {
+		"build": "npm run clean && webpack --config ./webpack.config.js --mode production --progress",
+		"dev": "npm run clean && webpack --config ./webpack.config.js --mode development",
+		"dev:watch": "npm run clean && webpack --config ./webpack.config.js --mode development --watch",
+		"start": "webpack serve --config ./webpack.config.js --mode development --host 0.0.0.0",
+		"clean": "rimraf ./dist"
+	},
+	"dependencies": {
+		"preact": "10.5.13"
+	},
+	"devDependencies": {
+		"@types/webpack": "4.41.26",
+		"copy-webpack-plugin": "8.0.0",
+		"css-loader": "5.1.2",
+		"ts-loader": "8.0.18",
+		"typescript": "5.0.4",
+		"webpack": "5.89.0",
+		"webpack-cli": "5.1.4",
+		"webpack-dev-server": "4.11.1"
+	}
+}
