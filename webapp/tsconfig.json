@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
 		"outDir": "./dist",
-		"target": "es5",
+		"target": "ESNext",
 		"moduleResolution": "node",
-		"module": "commonjs",
+		"module": "ESNext",
 		"noImplicitAny": false,
 		"removeComments": true,
 		"sourceMap": true,
