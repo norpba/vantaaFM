@@ -3,6 +3,7 @@ import { h } from 'preact'
 import 'bulma/css/bulma.css' // Import Bulma styles
 import '../styles/global.css' // Import your global styles
 import { sendCreateAccount, sendLogin } from './login'
+import { connectToSpotify } from './script'
 
 const Hero = () => {
   return (
@@ -17,8 +18,13 @@ const Hero = () => {
                 </p>
 				<button onClick = { sendLogin }>Login</button>
 				<button onClick = { sendCreateAccount }>Create Account</button>
+				<button onClick = { connectToSpotify }>Connect to spotify</button>
             </div>
         </section>
+
+		<section class="hero is-info">
+
+		</section>
     </div>
   )
 }

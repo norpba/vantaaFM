@@ -1,15 +1,22 @@
-const clientId = "a73c3f3e5ffb42aab2c0148f0fe91626"
-const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
+export const connectToSpotify = async () => {
+	console.log("connectToSpotify alkaa") //debug
+	const clientId = "a73c3f3e5ffb42aab2c0148f0fe91626"
+	const params = new URLSearchParams(window.location.search);
+	const code = params.get("code");
 
-if (!code) {
-	redirectToAuthCodeFlow(clientId);
-} else {
-	const accessToken = await getAccessToken(clientId, code);
-	const profile = await fetchProfile(accessToken);
-	populateUI(profile);
+	if (!code) {
+		console.log("connectToSpotify !code == true") //debug
+		redirectToAuthCodeFlow(clientId);
+	} else {
+		console.log("connectToSpotify !code == false")
+		const accessToken = await getAccessToken(clientId, code);
+		const profile = await fetchProfile(accessToken);
+		console.log("profile data printing begins") //debug
+		console.log(profile); // profile data logs to console
+		console.log("profile data printing ends") //debug
+		populateUI(profile);
+	}
 }
-
 export async function redirectToAuthCodeFlow(clientId: string) {
 	const verifier = generateCodeVerifier(128);
 	const challenge = await generateCodeChallenge(verifier);
@@ -19,7 +26,7 @@ export async function redirectToAuthCodeFlow(clientId: string) {
 	const params = new URLSearchParams();
 	params.append("client_id", clientId);
 	params.append("response_type", "code");							 // localhost:3030 is a placeholder for testing purposes in localhost
-	params.append("redirect_uri", "http://localhost:3030/callback"); // after this is worked and on the main branch, it needs to be changed
+	params.append("redirect_uri", "http://localhost:3030"); // after this is worked and on the main branch, it needs to be changed
 	params.append("scope", "user-read-private user-read-email user-top-read user-read-recently-played");
 	params.append("code_challenge_method", "S256");
 	params.append("code_challenge", challenge);
@@ -67,9 +74,25 @@ export async function getAccessToken(clientId: string, code: string): Promise<st
 }
 
 async function fetchProfile(token: string): Promise<any> {
-	// TODO: Call Web API
+	const result = await fetch("https://api.spotify.com/v1/me", {
+		method: "GET", headers: { Authorization: `Bearer ${token}`}
+	});
+
+	return await result.json();
 }
 
 function populateUI(profile: any) {
-	// TODO: Update UI with profile data
+	document.getElementById("displayName")!.innerText = profile.display_name;
+	if (profile.images[0]) {
+		const profileImage = new Image(200, 200);
+		profileImage.src = profile.images[0].url;
+		document.getElementById("avatar")!.appendChild(profileImage);
+	}
+	document.getElementById("id")!.innerText = profile.id;
+	document.getElementById("email")!.innerText = profile.email;
+	document.getElementById("uri")!.innerText = profile.uri;
+	document.getElementById("uri")!.setAttribute("href", profile.external_urls.spotify);
+	document.getElementById("url")!.innerText = profile.href;
+	document.getElementById("url")!.setAttribute("href", profile.href);
+	document.getElementById("imgUrl")!.innerText = profile.images[0]?.url ?? '(no profile image)';
 }
