@@ -1,10 +1,13 @@
 import React from 'react';
-import { Button, Drawer } from '@mui/material'
+import { useMemo } from "react";
+import { Routes, Route } from 'react-router-dom';
+import { GuardedRoute, GuardProvider } from "react-router-guards"
 import TemporaryDrawer from './components/sidebar'
 import Header from './components/header'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { sendCreateAccount, sendLogin } from './components/login/login'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import Home from './views/Home'
+import Login from './views/Login'
 
 const darkTheme = createTheme({
   palette: {
@@ -13,22 +16,41 @@ const darkTheme = createTheme({
 });
 
 function App() {
+  const navigationItems = useMemo(
+    () => [
+      {
+        key: "new",
+        title: "New Quotation",
+        path: "/",
+        component: Home
+      },
+      {
+        key: "stored",
+        title: "New Quotation 2",
+        path: "/login",
+        component: Login
+      }
+    ],
+    []
+  );
   return (
     <ThemeProvider theme={darkTheme}>
     <CssBaseline />
       <div>
         <Header />
-        <h1>Material-UI with TypeScript</h1>
-        <Button onClick = { sendLogin } variant="contained" color="primary">
-          Login
-        </Button>
-        <Button onClick = { sendCreateAccount } variant="contained" color="primary">
-          Create Account
-        </Button>
-        <Drawer></Drawer>
         <TemporaryDrawer />
+        <Routes>
+          {navigationItems.map(({ path, component: Component, key }) => (
+            <Route
+              key={key}
+              path={path}
+              element={<Component />}
+            />
+          ))}
+        </Routes>
       </div>
     </ThemeProvider>
+    
   );
 }
 
