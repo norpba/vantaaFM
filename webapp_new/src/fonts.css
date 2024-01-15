@@ -40,7 +40,7 @@
   
 
     @font-face {
-      font-family: 'CustomFont6';
+      font-family: 'Unicod Sans-Condensed-Light';
       src: local('CustomFont6'), url('./fonts/UNicod Sans Condensed Light.ttf') format('woff');
       font-weight: normal;
       font-style: normal;
@@ -56,7 +56,7 @@
   
 
     @font-face {
-      font-family: 'CustomFont8';
+      font-family: 'Unicod Sans-Consensed-Medium';
       src: local('CustomFont8'), url('./fonts/UNicod Sans Condensed Medium.ttf') format('woff');
       font-weight: normal;
       font-style: normal;
@@ -80,7 +80,7 @@
   
 
     @font-face {
-      font-family: 'CustomFont11';
+      font-family: 'Unicod Sans-Condensed-Ultralight';
       src: local('CustomFont11'), url('./fonts/UNicod Sans Condensed UltraLight.ttf') format('woff');
       font-weight: normal;
       font-style: normal;
@@ -88,7 +88,7 @@
   
 
     @font-face {
-      font-family: 'CustomFont12';
+      font-family: 'Unicod Sans-Condensed';
       src: local('CustomFont12'), url('./fonts/UNicod Sans Condensed.ttf') format('woff');
       font-weight: normal;
       font-style: normal;
