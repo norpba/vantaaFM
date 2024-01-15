@@ -43,7 +43,7 @@ const HeroBannerInnerBackground = styled(Paper)(({ theme }: { theme: Theme }) =>
 
 const HeaderText = styled(Typography)({
   fontFamily: 'Unicod Sans-Bold',
-  color: '#90caf9',
+  color: '#00d2b5',
   fontSize: '5rem',
   position: 'absolute',
   top: '50%',
@@ -55,9 +55,8 @@ const HeaderText = styled(Typography)({
   '&.visible': {
     opacity: 1, // Change opacity to 1 when the 'visible' class is applied
   },
-  border: '1px solid #1a1a1a7d',
-  borderRadius: '30px',
-  padding: '10px'
+  padding: '10px',
+  background: '#17171745'
 });
 
 const Paragraph = styled(Typography)({
