@@ -42,7 +42,7 @@ const HeroBannerInnerBackground = styled(Paper)(({ theme }: { theme: Theme }) =>
 }));
 
 const HeaderText = styled(Typography)({
-  fontFamily: 'Unicod Sans-Bold',
+  fontFamily: 'Unicod Sans-Condensed',
   color: '#00d2b5',
   fontSize: '5rem',
   position: 'absolute',
@@ -60,9 +60,9 @@ const HeaderText = styled(Typography)({
 });
 
 const Paragraph = styled(Typography)({
-    fontFamily: 'Unicod Sans-Bold',
+    fontFamily: 'Unicod Sans-Condensed-Ultralight',
     color: '#90caf9',
-    fontSize: '1.5rem',
+    fontSize: '2rem',
     position: 'absolute',
     top: '70%',
     left: '50%',
