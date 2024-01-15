@@ -38,7 +38,6 @@ function App() {
     <CssBaseline />
       <div>
         <Header />
-        <TemporaryDrawer />
         <Routes>
           {navigationItems.map(({ path, component: Component, key }) => (
             <Route
@@ -48,6 +47,7 @@ function App() {
             />
           ))}
         </Routes>
+        <TemporaryDrawer />
       </div>
     </ThemeProvider>
     

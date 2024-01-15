@@ -1,0 +1,160 @@
+
+    @font-face {
+      font-family: 'Unicod Bold-Italic';
+      src: local('CustomFont1'), url('./fonts/UNicod Sans Bold Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'Unicod Sans-Bold';
+      src: local('CustomFont2'), url('./fonts/UNicod Sans Bold.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont3';
+      src: local('CustomFont3'), url('./fonts/UNicod Sans Condensed Bold Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont4';
+      src: local('CustomFont4'), url('./fonts/UNicod Sans Condensed Bold.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont5';
+      src: local('CustomFont5'), url('./fonts/UNicod Sans Condensed Light Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont6';
+      src: local('CustomFont6'), url('./fonts/UNicod Sans Condensed Light.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont7';
+      src: local('CustomFont7'), url('./fonts/UNicod Sans Condensed Medium Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont8';
+      src: local('CustomFont8'), url('./fonts/UNicod Sans Condensed Medium.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont9';
+      src: local('CustomFont9'), url('./fonts/UNicod Sans Condensed Regular Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont10';
+      src: local('CustomFont10'), url('./fonts/UNicod Sans Condensed UltraLight Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont11';
+      src: local('CustomFont11'), url('./fonts/UNicod Sans Condensed UltraLight.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont12';
+      src: local('CustomFont12'), url('./fonts/UNicod Sans Condensed.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont13';
+      src: local('CustomFont13'), url('./fonts/UNicod Sans Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont14';
+      src: local('CustomFont14'), url('./fonts/UNicod Sans Light Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont15';
+      src: local('CustomFont15'), url('./fonts/UNicod Sans Light.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont16';
+      src: local('CustomFont16'), url('./fonts/UNicod Sans Medium Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont17';
+      src: local('CustomFont17'), url('./fonts/UNicod Sans Medium.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont18';
+      src: local('CustomFont18'), url('./fonts/UNicod Sans UltraLight Italic.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont19';
+      src: local('CustomFont19'), url('./fonts/UNicod Sans UltraLight.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
+
+    @font-face {
+      font-family: 'CustomFont20';
+      src: local('CustomFont20'), url('./fonts/UNicod Sans.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  
