@@ -8,7 +8,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import Home from './views/Home'
 import Login from './views/Login'
-import CreateAccount from './views/CreateAccount';
 
 const darkTheme = createTheme({
   palette: {
@@ -21,21 +20,15 @@ function App() {
     () => [
       {
         key: "new",
-        title: "Home",
+        title: "New Quotation",
         path: "/",
         component: Home
       },
       {
         key: "stored",
-        title: "Login",
+        title: "New Quotation 2",
         path: "/login",
         component: Login
-      },
-      {
-        key: "stored",
-        title: "Create Account",
-        path: "/createAccount",
-        component: CreateAccount
       }
     ],
     []

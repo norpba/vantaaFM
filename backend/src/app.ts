@@ -2,7 +2,6 @@
 import express from 'express'
 import { getAccountInformationAndJwtTokenIfAvailable, createDatabasePool, createAccount } from './mariadb'
 import cors from 'cors'
-import { getPasswordSecondHashWithSalt } from './utils'
 
 const app = express()
 app.use(cors())
@@ -19,7 +18,7 @@ app.post('/auth/login', async (req, res) => {
 	try {
 		const user = req.body
 		const { accountName, passwordHash } = user
-		const info = await getAccountInformationAndJwtTokenIfAvailable(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
+		const info = await getAccountInformationAndJwtTokenIfAvailable(mariaDbPool, accountName, passwordHash)
 		if (info === undefined) {
 			console.log('user failed to login:', accountName)
 			return res.status(400).json({ status: 400, message: 'Failed to login' })
@@ -42,7 +41,7 @@ app.post('/auth/createAccount', async (req, res) => {
 	try {
 		const user = req.body
 		const { accountName, passwordHash } = user
-		const success = await createAccount(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
+		const success = await createAccount(mariaDbPool, accountName, passwordHash)
 		if (success === false) {
 			console.log('Failed to create account for user: ', accountName)
 			return res.status(400).json({ status: 400, message: 'Failed to create account' })
