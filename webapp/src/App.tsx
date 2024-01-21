@@ -8,7 +8,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import Home from './views/Home'
 import Login from './views/Login'
-import CreateAccount from './views/CreateAccount';
+import CreateAccount from './views/CreateAccount'
 
 const darkTheme = createTheme({
   palette: {
