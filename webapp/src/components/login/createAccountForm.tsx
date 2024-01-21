@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import { sendCreateAccount, sendLogin } from './login'
 
-const LoginForm=()=>{
+const CreateAccountForm=()=>{
 	const [account, setAccount] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
 	const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
@@ -16,7 +16,7 @@ const LoginForm=()=>{
 			<Paper elevation={10} style={paperStyle}>
 				<Grid alignItems='center'>
 					 <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-					<h2>Login</h2>
+					<h2>Create Account</h2>
 				</Grid>
 				<TextField label='Username' placeholder='Enter username' variant="outlined" fullWidth required onChange={(e) => { setAccount(e.target.value) }}/>
 				<TextField label='Password' placeholder='Enter password' type='password' variant="outlined" fullWidth required onChange={(e) => { setPassword(e.target.value) }}/>
@@ -29,10 +29,10 @@ const LoginForm=()=>{
 					}
 					label="Remember me"
 				 />
-				<Button type='submit' onClick = { () => sendLogin(account, password) } color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
-				<Typography > Don't have an account?
-					 <Link href="/createAccount" >
-						Create Account
+				<Button type='submit' onClick = { () => sendCreateAccount(account, password) } color='primary' variant="contained" style={btnstyle} fullWidth>Create Account</Button>
+				<Typography > Do you have an account ?
+					 <Link href="/login" >
+						Sign Up 
 					</Link>
 				</Typography>
 			</Paper>
@@ -40,4 +40,4 @@ const LoginForm=()=>{
 	)
 }
 
-export default LoginForm
+export default CreateAccountForm
