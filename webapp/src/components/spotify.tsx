@@ -68,7 +68,7 @@ const SpotifyProfile: React.FC = () => {
 				const body = await fetch(url, payload)
 				const response = await body.json()
 		
-				localStorage.setItem('access_token', response.access_token)
+				localStorage.setItem('vantaa_fm_token', response.access_token)
 				localStorage.setItem('refresh_token', response.refresh_token)
 			} catch (error) {
 				console.log(error)
@@ -76,7 +76,7 @@ const SpotifyProfile: React.FC = () => {
 				throw error // Rethrow the error to indicate failure
 			}
 		}
-		
+
 		if (accessToken) {
 			fetchProfileWithToken()
 			refreshAccessToken()
