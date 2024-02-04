@@ -1,4 +1,9 @@
 
+  .header-logo {
+    font-family: Unicod Sans-Condensed !important;
+    color: #00d2b5 !important;
+  }
+  
   .playing {
     position: absolute;
     right: -20%;
