@@ -11,14 +11,14 @@ import {
 
 interface TrackProps {
   track: {
-    name: string;
+    name: string
     album: {
-      name: string;
-      images: { url: string }[];
-    };
-    artists: { name: string; external_urls: { spotify: string } }[];
-    played_at: string;
-  };
+      name: string
+      images: { url: string }[]
+    }
+    artists: { name: string; external_urls: { spotify: string } }[]
+    played_at: string
+  }
 }
 
 const Track: React.FC<TrackProps> = ({ track }) => {

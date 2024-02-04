@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Link from '@mui/material/Link'
+import '../styles.css'
 
 export default function Header() {
 	return (
@@ -23,7 +24,7 @@ export default function Header() {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						<Link href="/">Vantaa FM</Link>
+						<Link className="header-logo" href="/">Vantaa FM</Link>
 					</Typography>
 					<Button color="inherit" href="/login">Login</Button>
 				</Toolbar>
