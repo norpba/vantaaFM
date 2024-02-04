@@ -1,6 +1,6 @@
 // src/app.ts
 const express = require('express')
-import { getAccountInformationAndJwtTokenIfAvailable, createDatabasePool, createAccount } from './mariadb'
+import { login, createDatabasePool, createAccount, verifyVantaaFmToken } from './mariadb'
 import cors from 'cors'
 import { getPasswordSecondHashWithSalt } from './utils'
 import { Request, Response } from 'express'
@@ -28,7 +28,7 @@ const logger = winston.createLogger({
 })
 
 app.get('/', (req: Request, res: Response) => {
-	res.send('Hello, TypeScript test')
+	res.send('VantaaFM backend server!')
 })
 
 app.get('/getSpotifyToken', (req: Request, res: Response) => {
@@ -62,18 +62,10 @@ app.post('/auth/login', async (req: Request, res: Response) => {
 	try {
 		const user = req.body
 		const { accountName, passwordHash } = user
-		const info = await getAccountInformationAndJwtTokenIfAvailable(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
-		if (info === undefined) {
-			console.log('user failed to login:', accountName)
-			return res.status(400).json({ status: 400, message: 'Failed to login' })
-		}
-		console.log('user logged in:', accountName)
-		res.status(200).json({
-			status: 200,
-			success: true,
-			message: "login success",
-			data: info,
-		})
+		const loginData = await login(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
+		if (loginData.success) console.log('User logged in:', accountName)
+		else console.log('Failed to log in user: ', accountName)
+		res.status(loginData.status).json(loginData)
 	} catch(error) {
 		console.error(error)
 		return res.status(400).json({ status: 400, message: 'Failed to login' })
@@ -85,21 +77,25 @@ app.post('/auth/createAccount', async (req: Request, res: Response) => {
 	try {
 		const user = req.body
 		const { accountName, passwordHash } = user
-		const success = await createAccount(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
-		if (success === false) {
-			console.log('Failed to create account for user: ', accountName)
-			return res.status(400).json({ status: 400, message: 'Failed to create account' })
-		}
-		console.log('Created account for user:', accountName)
-		res.status(200).json({
-			status: 200,
-			success: true,
-			message: "account created succesfully",
-			data: accountName,
-		})
+		const createAccountData = await createAccount(mariaDbPool, accountName, getPasswordSecondHashWithSalt(passwordHash))
+		if (createAccountData.success) console.log('Created account for user:', accountName)
+		else console.log('Failed to create account for user: ', accountName)
+		res.status(createAccountData.status).json(createAccountData)
 	} catch(error) {
 		console.error(error)
 		return res.status(400).json({ status: 400, message: 'Failed to create account' })
+	}
+})
+
+app.post('/auth/testToken', async (req: Request, res: Response) => {
+	console.log('/auth/testToken')
+	try {
+		const token = req.body
+		const { vantaaFMLoginToken } = token
+		verifyVantaaFmToken(vantaaFMLoginToken)
+	} catch(error) {
+		console.error(error)
+		return res.status(400).json({ status: 400, message: 'Failed to test jwt token' })
 	}
 })
 

@@ -25,6 +25,7 @@
 		"@types/request": "^2.48.12",
 		"cors": "2.8.5",
 		"express": "4.18.2",
+		"funtypes": "5.1.0",
 		"jsonwebtoken": "9.0.2",
 		"mariadb": "3.2.3",
 		"node-fetch": "^3.3.2",
