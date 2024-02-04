@@ -1,9 +1,10 @@
 import { access } from 'fs'
 import React, { useEffect, useState } from 'react'
+import { useAppContext } from './context/AppContext'
 
 const SpotifyProfile: React.FC = () => {
-	const [profile, setProfile] = useState<any | null>(null)
-	const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useState<any | null>(null)
+	const {profile, setProfile } = useAppContext()
+	const { latestTracks, setLatestTracks } = useAppContext()
 
 	useEffect(() => {
 		const clientId = '2b63d5ba3c2744268dc50fb243ccc470'
@@ -40,10 +41,9 @@ const SpotifyProfile: React.FC = () => {
 					// Fetch the user profile using the existing access token
 					const userProfile = await fetchProfile(accessToken)
 					const recentlyPlayedTracks = await fetchRecentlyPlayed(accessToken)
-					setRecentlyPlayedTracks(recentlyPlayedTracks)
-					setProfile(userProfile)
-					console.log(userProfile)
 					console.log(recentlyPlayedTracks)
+					setLatestTracks(recentlyPlayedTracks)
+					setProfile(userProfile)
 				}
 			} catch (error: any) {
 				console.log(error)
@@ -124,32 +124,34 @@ const SpotifyProfile: React.FC = () => {
 		})
 		return await response.json()
 	}
-
 	const fetchRecentlyPlayed = async (token: string): Promise<any> => {
-		console.log(token)
 		const apiUrl = 'https://api.spotify.com/v1/me/player/recently-played'
-		fetch(apiUrl, {
-			method: 'GET',
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			},
-		  })
-			.then(response => {
-			  if (!response.ok) {
-					throw new Error(`HTTP error! Status: ${response.status}`)
-			  }
-			  return response.json()
+	
+		try {
+			const response = await fetch(apiUrl, {
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			})
-			.then(data => {
-			  const recentlyPlayedTracks = data.items
-			  console.log(recentlyPlayedTracks)
-			  return recentlyPlayedTracks
-			})
-			.catch(error => {
-			  console.error('Error fetching recently played tracks:', error.message)
-			})
+	
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`)
+			}
+	
+			const data = await response.json()
+			const recentlyPlayedTracks = data.items
+			console.log(recentlyPlayedTracks)
+	
+			return recentlyPlayedTracks
+		} catch (error) {
+			console.log(error)
+		}
+	
+		// Add a default return statement or return undefined
+		return undefined
 	}
-
+ 
 	const populateUI = (profile: any) => {
 		// TODO: Implement updating UI with profile data
 		// This function can be used to update your React component state or render UI components

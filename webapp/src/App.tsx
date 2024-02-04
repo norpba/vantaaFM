@@ -11,7 +11,6 @@ import Login from './views/Login'
 import CreateAccount from './views/CreateAccount'
 import SpotifyCallBack from './views/SpotifyCallBack'
 
-
 const darkTheme = createTheme({
 	palette: {
 		mode: 'dark',
