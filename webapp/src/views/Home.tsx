@@ -12,7 +12,11 @@ export default function Home() {
 		<div>
 			<HeroBanner />
 			<SpotifyAuth />
-			<TrackList tracks={latestTracks} />
+			{latestTracks ? (
+				<TrackList tracks={latestTracks} />
+			) : (
+				<p>Loading or no tracks available.</p>
+			)}		
 		</div>
 	)
 }
