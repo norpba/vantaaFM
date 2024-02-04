@@ -8,7 +8,6 @@ const SpotifyCallBack: React.FC = () => {
 		// Handle the callback logic here, e.g., extract the authorization code from the URL
 		const params = new URLSearchParams(window.location.search)
 		const code = params.get('code')
-		console.log(code)
 		localStorage.setItem('code', code || '')
 		// Redirect back to the front page
 		navigate('/')
@@ -20,6 +19,6 @@ const SpotifyCallBack: React.FC = () => {
 			{/* You can add loading indicators or other UI elements if needed */}
 		</div>
 	)
-};
+}
 
 export default SpotifyCallBack

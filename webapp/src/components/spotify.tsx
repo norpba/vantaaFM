@@ -10,10 +10,9 @@ const SpotifyProfile: React.FC = () => {
 		const clientId = '2b63d5ba3c2744268dc50fb243ccc470'
 		const code = localStorage.getItem('code')
 		const accessToken = localStorage.getItem('vantaa_fm_token')
-  
+
 		const fetchData = async () => {
 			if (!code) {
-				console.log('Fetch code')
 				// Redirect to Spotify authorization page if there's no code
 				redirectToAuthCodeFlow(clientId)
 			} else {
@@ -21,13 +20,10 @@ const SpotifyProfile: React.FC = () => {
 					// Get access token for the code
 					const fetchedAccessToken = await getAccessToken(clientId, code)
 					localStorage.removeItem('code')
-  
-					// Fetch the user profile using the access token
-					console.log(fetchedAccessToken)
-  
 					// Update the state with the profile data
 					const userProfile = await fetchProfile(fetchedAccessToken)
-					console.log(userProfile)
+					const recentlyPlayedTracks = await fetchRecentlyPlayed(fetchedAccessToken)
+					setLatestTracks(recentlyPlayedTracks)
 					setProfile(userProfile)
 				} catch (error) {
 					console.log(error)
@@ -41,7 +37,6 @@ const SpotifyProfile: React.FC = () => {
 					// Fetch the user profile using the existing access token
 					const userProfile = await fetchProfile(accessToken)
 					const recentlyPlayedTracks = await fetchRecentlyPlayed(accessToken)
-					console.log(recentlyPlayedTracks)
 					setLatestTracks(recentlyPlayedTracks)
 					setProfile(userProfile)
 				}
@@ -49,13 +44,46 @@ const SpotifyProfile: React.FC = () => {
 				console.log(error)
 			}
 		}
-  
+
+		const refreshAccessToken = async (): Promise<void> => {
+			const clientId = '2b63d5ba3c2744268dc50fb243ccc470'
+		
+			// Refresh token that has been previously stored
+			const refreshToken = localStorage.getItem('refresh_token')
+			const url = 'https://accounts.spotify.com/api/token'
+		
+			const payload = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: new URLSearchParams({
+					grant_type: 'refresh_token',
+					refresh_token: refreshToken!,
+					client_id: clientId,
+				}),
+			}
+		
+			try {
+				const body = await fetch(url, payload)
+				const response = await body.json()
+		
+				localStorage.setItem('vantaa_fm_token', response.access_token)
+				localStorage.setItem('refresh_token', response.refresh_token)
+			} catch (error) {
+				console.log(error)
+				// Handle the error as needed
+				throw error // Rethrow the error to indicate failure
+			}
+		}
+
 		if (accessToken) {
 			fetchProfileWithToken()
+			refreshAccessToken()
 		} else {
 			fetchData()
 		}
-	}, []) // Empty dependency array means it runs once on mount
+	}, [])
   
 	const redirectToAuthCodeFlow = async (clientId: string) => {
 		const verifier = generateCodeVerifier(128)
@@ -113,8 +141,9 @@ const SpotifyProfile: React.FC = () => {
 			body: params
 		})
 
-		const { access_token } = await result.json()
+		const { access_token, refresh_token } = await result.json()
 		localStorage.setItem('vantaa_fm_token', access_token || '')
+		localStorage.setItem('refresh_token', refresh_token || '') 
 		return access_token
 	}
 
@@ -140,9 +169,7 @@ const SpotifyProfile: React.FC = () => {
 			}
 	
 			const data = await response.json()
-			const recentlyPlayedTracks = data.items
-			console.log(recentlyPlayedTracks)
-	
+			const recentlyPlayedTracks = data.items	
 			return recentlyPlayedTracks
 		} catch (error) {
 			console.log(error)
