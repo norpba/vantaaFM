@@ -22,10 +22,10 @@ const CreateAccountForm=()=>{
 				<TextField label='Password' placeholder='Enter password' type='password' variant="outlined" fullWidth required onChange={(e) => { setPassword(e.target.value) }}/>
 				<FormControlLabel
 					control={
-					<Checkbox
-						name="checkedB"
-						color="primary"
-					/>
+						<Checkbox
+							name="checkedB"
+							color="primary"
+						/>
 					}
 					label="Remember me"
 				 />
